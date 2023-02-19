@@ -1,5 +1,6 @@
 package org.vizzoid.utils.engine;
 
+import org.opencv.core.Mat;
 import org.vizzoid.utils.position.MoveablePosition;
 import org.vizzoid.utils.position.Position;
 
@@ -86,7 +87,7 @@ public class Engine3D {
         Triangle triangle1;
         this.camera = camera;
         internalEngine = new DefaultEngine();
-        internalEngine.setDimension(new Dimension(256, 240));
+        internalEngine.setDimension(new Dimension(256 * 4, 240 * 4));
         internalEngine.setPainter(this::paintComponent);
         internalEngine.addKeyListener(wasdKeyListener);
         internalEngine.addKeyListener(arrowKeyListener);
@@ -151,11 +152,11 @@ public class Engine3D {
         //object3DS.add(cube);
         //object3DS.addAll(Arrays.asList(cube.getTriangles()));
         //object3DS.add(Mesh.load("D:\\Users\\vtyso\\Downloads\\New Text Document.txt"));
-        Engine3D.axis = Mesh.load("D:\\Users\\vtyso\\Downloads\\New Text Document (2).txt");
-        object3DS.add(axis);
-        triangle1 = axis.getTriangles()[118];
-        /*20, 22, 23, 26, 27, 29, 45, 49, 50, 67, 70, 71, 73, 77, 87, 93, 95, 96, 99, 100, 102, 106, 110, 111, 114, 117, 118, 120, 124, 134*/
+        Engine3D.axis = Mesh.load("D:\\Users\\vtyso\\Downloads\\New Text Document.txt");
 
+        /*triangle1 = axis.getTriangles()[118];
+        /*20, 22, 23, 26, 27, 29, 45, 49, 50, 67, 70, 71, 73, 77, 87, 93, 95, 96, 99, 100, 102, 106, 110, 111, 114, 117, 118, 120, 124, 134*/
+        /*
         camera.reset();
         System.out.println(triangle1);
         System.out.println("rotate");
@@ -181,7 +182,7 @@ public class Engine3D {
                 System.out.println("One of bound:");
                 System.out.println(triangle);
             }
-        });
+        });*/
 
         object3DS.add(axis);
 
@@ -204,7 +205,7 @@ public class Engine3D {
 
     @SuppressWarnings("ForLoopReplaceableByForEach")
     protected void paintComponent(Graphics g, long missedTime) {
-        if (true) return;
+        //if (true) return;
         camera.reset();
 
         for (int i = 0, object3DSSize = object3DS.size(); i < object3DSSize; i++) {
@@ -228,7 +229,7 @@ public class Engine3D {
         arrowKeyListener.tick(missedTime);
     }
 
-    double theta = 2 * Math.PI;
+    double theta = 0.001;
 
     public void queue(Drawable polygon) {
         toRaster.add(polygon);

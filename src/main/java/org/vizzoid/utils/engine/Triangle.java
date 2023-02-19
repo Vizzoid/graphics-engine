@@ -192,10 +192,10 @@ public class Triangle implements Object3D, Drawable {
     /**
      * lighting
      */
-    private Color color(double dotProduct) {return Color.WHITE;
-        //int rgb = Math.max((int) (dotProduct * 80), 255);
-        //return new Color(rgb, rgb, rgb);
-        /*int index = 0;
+    private Color color(double dotProduct) {//return Color.WHITE;
+        int rgb = Math.max((int) (dotProduct * 80), 255);
+        return new Color(rgb, rgb, rgb);
+        /*int index = -1;
         Triangle[] triangles = Engine3D.axis.getTriangles();
         for (int i = 0; i < triangles.length; i++) {
             if (triangles[i] == this) {
@@ -236,12 +236,7 @@ public class Triangle implements Object3D, Drawable {
     }
 
     public static void main(String[] args) {
-        ClipInfo info = new Triangle(1, 1, 1, 0, 0, 0, -1, -1, -1).clipAgainstPlane(Position.EMPTY, Position.UP);
-        System.out.println(info.triangle1);
-        System.out.println(info.triangle2);
-        ClipInfo info1 = new Triangle(1, 1, 1, 0, 0, 0, -1, -1, -1).clipAgainstPlane(Position.EMPTY, Position.FORWARD);
-        System.out.println(info1.triangle1);
-        System.out.println(info1.triangle2);
+        //System.out.println(intersect);
     }
 
     public ClipInfo clipAgainstPlane(Position plane1, Position plane2, Position pos1, Position pos2, Position pos3) {
@@ -276,7 +271,7 @@ public class Triangle implements Object3D, Drawable {
         }
 
         if (insideIndex == 3) {
-            return ClipInfo.one(this);
+            return ClipInfo.one(new Triangle(pos1, pos2, pos3));
         }
 
         if (insideIndex == 1) {
