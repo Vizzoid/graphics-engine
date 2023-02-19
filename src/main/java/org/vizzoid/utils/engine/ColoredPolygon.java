@@ -4,7 +4,7 @@ import org.vizzoid.utils.position.Position;
 
 import java.awt.*;
 
-public class ColoredPolygon extends Polygon implements Cloneable {
+public class ColoredPolygon extends Polygon implements Cloneable, Drawable {
 
     public Color color = Color.WHITE;
     public double[] zpoints;
@@ -54,6 +54,11 @@ public class ColoredPolygon extends Polygon implements Cloneable {
             ypoints[i] = (int) position.getY();
             zpoints[i] = position.getZ();
         }
+    }
+
+    @Override
+    public void draw(Graphics graphics, Engine3D engine) {
+        draw(graphics);
     }
 
     public void draw(Graphics graphics) {

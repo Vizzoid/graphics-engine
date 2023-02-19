@@ -1,7 +1,5 @@
 package org.vizzoid.utils.engine;
 
-import java.awt.*;
-
 /**
  * Represents any object in 3d space that can be added to drawing engine.
  * Useful functions for drawing are:
@@ -9,6 +7,6 @@ import java.awt.*;
  */
 public interface Object3D {
 
-    void draw(Graphics graphics, Engine3D engine);
+    void prepareRaster(Engine3D engine);
 
 }

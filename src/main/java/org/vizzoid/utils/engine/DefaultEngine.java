@@ -8,15 +8,15 @@ import java.awt.event.MouseMotionListener;
 
 public class DefaultEngine {
 
-    private final JFrame window = new JFrame();
-    private final JPanel display;
+    protected final JFrame window = new JFrame();
+    protected final JPanel display;
     public final Dimension dimension = new Dimension();
     public final Dimension center = new Dimension();
-    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
-    private double aspectRatio;
-    private Painter painter = Painter.DEFAULT;
-    private final Sleeper sleeper = new Sleeper();
-    private boolean shouldRepaint = true;
+    protected final Toolkit toolkit = Toolkit.getDefaultToolkit();
+    protected double aspectRatio;
+    protected Painter painter = Painter.DEFAULT;
+    protected final Sleeper sleeper = createSleeper();
+    protected boolean shouldRepaint = true;
 
     public DefaultEngine() {
         display = new JPanel() {
@@ -27,6 +27,10 @@ public class DefaultEngine {
         };
         window.add(display);
         prepare();
+    }
+
+    protected Sleeper createSleeper() {
+        return new Sleeper();
     }
 
     /**
@@ -82,9 +86,10 @@ public class DefaultEngine {
     }
 
     public void paint(Graphics graphics) {
+        long missedTime = sleeper.pullMissedTime();
         clearScreen(graphics);
 
-        painter.paint(graphics);
+        painter.paint(graphics, missedTime);
 
         if (!shouldRepaint) return;
         sleep();

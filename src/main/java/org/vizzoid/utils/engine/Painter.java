@@ -4,7 +4,7 @@ import java.awt.*;
 
 @FunctionalInterface
 public interface Painter {
-    Painter DEFAULT = g -> {};
+    Painter DEFAULT = (g, m) -> {};
 
-    void paint(Graphics graphics);
+    void paint(Graphics graphics, long missedTime);
 }

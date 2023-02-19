@@ -10,7 +10,8 @@ import static java.lang.System.currentTimeMillis;
 public class Sleeper {
 
     private double msPerFrame = 1;
-    private long lastSleep;
+    private long lastSleep = -1;
+    private long lastSleep0 = -1; // before sleep
 
     public double getMaxFps() {
         return 1000 / msPerFrame;
@@ -31,7 +32,15 @@ public class Sleeper {
             }
         }
 
+        this.lastSleep0 = lastSleep;
         this.lastSleep = currentTimeMillis();
+        if (lastSleep0 == -1) lastSleep0 = lastSleep;
+    }
+
+    public long pullMissedTime() {
+        double missedTime = (lastSleep - lastSleep0) / msPerFrame;
+        if (missedTime < 2) return 1;
+        return (long) missedTime;
     }
 
 }

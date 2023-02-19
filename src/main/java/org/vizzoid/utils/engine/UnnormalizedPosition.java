@@ -35,4 +35,10 @@ public class UnnormalizedPosition extends MoveablePosition {
         this.length = length;
     }
 
+    @Override
+    public MoveablePosition normalize() {
+        super.normalize();
+        length = 1;
+        return this;
+    }
 }

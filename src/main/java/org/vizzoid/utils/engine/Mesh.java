@@ -3,7 +3,6 @@ package org.vizzoid.utils.engine;
 import org.vizzoid.utils.position.MoveablePosition;
 import org.vizzoid.utils.position.Position;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ public class Mesh implements Object3D {
     }
 
     @Override
-    public void draw(Graphics graphics, Engine3D engine) {
+    public void prepareRaster(Engine3D engine) {
         for (Triangle triangle : triangles) {
-            triangle.draw(graphics, engine);
+            triangle.prepareRaster(engine);
         }
     }
 
@@ -56,9 +55,11 @@ public class Mesh implements Object3D {
                 }
             }
             return new Mesh(triangles.toArray(Triangle[]::new));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            NullPointerException nullException = new NullPointerException(filename);
+            nullException.initCause(e);
+            throw nullException;
         }
-        return null;
     }
 
     private static Position positionFromString(String s) {
